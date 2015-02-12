@@ -1,0 +1,8 @@
+name = "Sudo Mode"
+description = "Security access control for Drupal sites"
+package = "Security"
+core = "7.x"
+version = "7.x-1.1"
+
+; Configuration
+configure = admin/config/people/sudo_mode
