@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Module file for sudo_mode.
+ */
+
+/**
+ * Implements hook_boot().
+ */
+function sudo_mode_boot() {
+  global $user;
+  if ($user->uid == 0) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function sudo_mode_menu() {
+  $menu = array();
+
+  $menu['admin/config/people/sudo_mode'] = array(
+    'title' => 'Sudo Mode settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('sudo_mode_administration_settings'),
+    'file path' => drupal_get_path('module', 'sudo_mode') . '/admin',
+    'file' => 'sudo_mode.admin.inc',
+    'access callback' => 'configure sudo mode',
+  );
+
+  return $menu;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function sudo_mode_permission() {
+  return array(
+    'configure sudo mode' => array(
+      'title' => t('Configure Sudo Mode'),
+      'description' => t('Access and use the configuration options for Sudo Mode.'),
+    ),
+  );
+}
