@@ -27,5 +27,12 @@ function sudo_mode_administration_settings() {
     '#default_value' => variable_get('sudo_mode_enabled', 0),
   );
 
+  $form['configuration']['sudo_mode_blacklist_urls'] = array(
+    '#type' => 'textarea',
+    '#title' => t('URL blacklist'),
+    '#description' => t('A list of paths you wish to re-prompt the user for authentication (one per line).'),
+    '#default_value' => variable_get('sudo_mode_blacklist_urls', ''),
+  );
+
   return system_settings_form($form);
 }

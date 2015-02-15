@@ -10,8 +10,16 @@
  */
 function sudo_mode_boot() {
   global $user;
-  if ($user->uid == 0) {
+
+  if ($user->uid == 0 || !variable_get('sudo_mode_enabled')) {
     return;
+  }
+
+  $url = $_GET['q'];
+  $blacklist_paths = array_map('trim', explode("\n", variable_get('sudo_mode_blacklist_urls')));
+
+  if (in_array($url, $blacklist_paths)) {
+    var_export('I AM A FORBIDDEN PATH!');
   }
 }
 
